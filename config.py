@@ -2,7 +2,13 @@ import os
 import logging
 from logging.handlers import RotatingFileHandler
 
+from os import environ
 
+API = environ.get("API", "fc1ce78ad84b7e6404aac66fe7f9e5c8b369a66f") # shortlink api
+URL = environ.get("URL", "linkshortify.com") # shortlink domain without https://
+VERIFY_TUTORIAL = environ.get("VERIFY_TUTORIAL", "https://t.me/udhvfrf/36") # how to open link 
+BOT_USERNAME = environ.get("BOT_USERNAME", "Af_Filestore_01_bot") # bot username without @
+VERIFY = environ.get("VERIFY", "True") # set True Or False and make sure spelling is correct and first letter capital.
 
 
 BOT_TOKEN = os.environ.get("BOT_TOKEN", "")

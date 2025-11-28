@@ -26,6 +26,51 @@ async def start_command(client: Client, message: Message):
         except:
             pass
     text = message.text
+
+    @Bot.on_message(filters.command('start') & filters.private & subscribed)
+async def start_command(client: Client, message: Message):
+    id = message.from_user.id
+    if not await present_user(id):
+        try:
+            await add_user(id)
+        except:
+            pass
+
+    text = message.text
+    
+    # 🔹 Handle Verify Link
+    if len(text) > 7 and text.split(" ", 1)[1].startswith("verify-"):
+        data = text.split(" ", 1)[1]
+        userid = data.split("-", 2)[1]
+        token = data.split("-", 3)[2]
+
+        if str(message.from_user.id) != str(userid):
+            return await message.reply_text("<b>Invalid or Expired Verification Link ❌</b>")
+
+        is_valid = await check_token(client, userid, token)
+        if is_valid:
+            await verify_user(client, userid, token)
+            return await message.reply_text(
+                text=f"<b>🎉 Hey {message.from_user.mention}, You are successfully verified!</b>\nNow you can access all files till midnight ✔️"
+            )
+        else:
+            return await message.reply_text("<b>Invalid or Expired Verification Link ❌</b>")
+
+    # 🔹 Check if user is not verified before file sending
+    if not await check_verification(client, id) and VERIFY:
+        btn = [
+            [
+                InlineKeyboardButton("✔️ Verify Now", url=await get_token(client, id, f"https://t.me/{BOT_USERNAME}?start="))
+            ],
+            [
+                InlineKeyboardButton("📌 How To Verify?", url=VERIFY_TUTORIAL)
+            ]
+        ]
+        return await message.reply_text(
+            "<b>You are not verified ❌\nPlease verify to continue file access!</b>",
+            reply_markup=InlineKeyboardMarkup(btn),
+            protect_content=True
+        )
     if len(text)>7:
         try:
             base64_string = text.split(" ", 1)[1]

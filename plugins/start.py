@@ -26,18 +26,6 @@ async def start_command(client: Client, message: Message):
         except:
             pass
     text = message.text
-
-    @Bot.on_message(filters.command('start') & filters.private & subscribed)
-async def start_command(client: Client, message: Message):
-    id = message.from_user.id
-    if not await present_user(id):
-        try:
-            await add_user(id)
-        except:
-            pass
-
-    text = message.text
-    
     # 🔹 Handle Verify Link
     if len(text) > 7 and text.split(" ", 1)[1].startswith("verify-"):
         data = text.split(" ", 1)[1]

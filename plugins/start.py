@@ -55,7 +55,7 @@ async def start_command(client: Client, message: Message):
             ]
         ]
         return await message.reply_text(
-            "<b>You are not verified ❌\nPlease verify to continue file access!</b>",
+            "<b>You are not verified ❌\nPlease verify to continue file access!/n/nআপনি আজকে ভেরিফাই করেননি ভেরিফাই বাটন এ ক্লিক করে ভেরিফাই করুন\n\n app aj verify nahin hain verify button par click karke verify Karen</b>",
             reply_markup=InlineKeyboardMarkup(btn),
             protect_content=True
         )
@@ -123,7 +123,7 @@ async def start_command(client: Client, message: Message):
                 pass
 
 
-        k = await client.send_message(chat_id = message.from_user.id, text=f"<b>❗️ <u>IMPORTANT</u> ❗️</b>\n\nThis Video / File Will Be Deleted In {file_auto_delete} (Due To Copyright Issues).\n\n📌 Please watch Video / File before {file_auto_delete}.\n\nএই ভিডিও {file_auto_delete} ঘন্টা পর ডিলেট হয়ে যাবে এর আগে দেখে নিবেন।\n\n iss video {file_auto_delete} baat delete ho jayega jaldi dekh lo.")
+        k = await client.send_message(chat_id = message.from_user.id, text=f"<b>❗️ <u>IMPORTANT</u> ❗️</b>\n\nThis Video / File Will Be Deleted In {file_auto_delete} (Due To Copyright Issues).\n\n📌 Please watch Video / File before {file_auto_delete}.\n\nএই ভিডিও {file_auto_delete} ঘন্টা পর ডিলেট হয়ে যাবে এর আগে দেখে নিবেন।\n\nये वीडियो 12 घंटे के बाद मिट जाएगा, मिटने से पहले इसे देख लीजिए .")
 
         # Schedule the file deletion
         asyncio.create_task(delete_files(madflix_msgs, client, k))

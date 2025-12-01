@@ -11,7 +11,7 @@ BOT_USERNAME = environ.get("BOT_USERNAME", "Af_Filestore_01_bot") # bot username
 VERIFY = environ.get("VERIFY", "True") # set True Or False and make sure spelling is correct and first letter capital.
 
 
-BOT_TOKEN = os.environ.get("BOT_TOKEN", "8071280685:AAEw5L6AAa8Kmt8-n0ouQFHaD5LOVuudm3g")
+BOT_TOKEN = os.environ.get("BOT_TOKEN", "")
 API_ID = int(os.environ.get("API_ID", "25527780"))
 API_HASH = os.environ.get("API_HASH", "1ed74b5498913cd53b47063f692abd38")
 
